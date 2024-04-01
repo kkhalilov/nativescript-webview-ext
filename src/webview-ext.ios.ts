@@ -767,7 +767,21 @@ export class WKUIDelegateNotaImpl extends NSObject implements WKUIDelegate {
             gotResponse = true;
         });
     }
-
+    
+    /**
+     * Handle confirm dialogs from the webview microphone at ios version >= 15. It should trigger alert dialog for microphone access once.
+     */
+    WKUIDelegateNotaImpl.prototype.webViewRequestMediaCapturePermissionForOriginInitiatedByFrameTypeDecisionHandler = function (
+      webView,
+      originx,
+      frame,
+      type,
+      decisionHandler
+    ) {
+      // Grant permission for media capture
+      decisionHandler(WKPermissionDecision.Grant);
+    };
+    
     /**
      * Handle confirm dialogs from the webview
      */
